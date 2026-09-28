@@ -93,7 +93,7 @@ export async function getPosts(updatedMin?: string): Promise<BloggerPost[]> {
       console.log(`Fetching Blogger API v3: ${API_URL} (pageToken: ${pageToken || 'none'})`);
 
       const res = await fetch(url.toString(), {
-        next: { tags: ['posts'] }
+        next: { tags: ['posts'], revalidate: 3600 }
       });
       
       if (!res.ok) {
@@ -142,7 +142,7 @@ export async function getPosts(updatedMin?: string): Promise<BloggerPost[]> {
     const url = `https://www.blogger.com/feeds/${BLOG_ID}/posts/default?alt=json&max-results=500`;
     
     const res = await fetch(url, {
-      next: { tags: ['posts'] }
+      next: { tags: ['posts'], revalidate: 3600 }
     });
     
     if (!res.ok) {
